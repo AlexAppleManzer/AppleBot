@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Test(commands.Cog):
+class AutoReact(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -11,4 +11,4 @@ class Test(commands.Cog):
             await message.add_reaction('😬')
 
 def setup(bot):
-    bot.add_cog(Test(bot))
+    bot.add_cog(AutoReact(bot))
