@@ -30,7 +30,7 @@ jobs:
         az container create \
           --resource-group AppleBot \
           --name applebot \
-          --image applebot:applebot.azurecr.io/applebot:${{ github.sha }} \
+          --image applebot.azurecr.io/applebot:${{ github.sha }} \
           --restart-policy OnFailure \
           --registry-username ${{ secrets.REGISTRY_USERNAME }} \
           --registry-password ${{ secrets.REGISTRY_PASSWORD }} \
