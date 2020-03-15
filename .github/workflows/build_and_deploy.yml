@@ -32,8 +32,8 @@ jobs:
           --name applebot \
           --image applebot:applebot.azurecr.io/applebot:${{ github.sha }} \
           --restart-policy OnFailure \
-          --registry-username: ${{ secrets.REGISTRY_USERNAME }} \
-          --registry-password: ${{ secrets.REGISTRY_PASSWORD }} \
+          --registry-username ${{ secrets.REGISTRY_USERNAME }} \
+          --registry-password ${{ secrets.REGISTRY_PASSWORD }} \
           --environment-variables 'DISCORD_TOKEN'='${{ secrets.DISCORD_TOKEN }}' 'RIOT_API_KEY'='${{ secrets.RIOT_API_KEY }}'
     
     - name: Azure logout
