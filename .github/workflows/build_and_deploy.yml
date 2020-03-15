@@ -25,10 +25,14 @@ jobs:
         docker build . -t applebot.azurecr.io/applebot:${{ github.sha }}
         docker push applebot.azurecr.io/applebot:${{ github.sha }}
         
-    - uses: azure/webapps-container-deploy@v1
-      with:
-        app-name: 'applebot'
-        images: 'applebot.azurecr.io/applebot:${{ github.sha }}'
+    - name: Deploy to Azure Container Instance
+      run: |
+        az container create \
+          --resource-group AppleBot \
+          --name applebot \
+          --image applebot:applebot.azurecr.io/applebot:${{ github.sha }} \
+          --restart-policy OnFailure
+          --environment-variables 'DISCORD_TOKEN'='${{ secrets.DISCORD_TOKEN }}' 'RIOT_API_KEY'='${{ secrets.RIOT_API_KEY }}'
     
     - name: Azure logout
       run: |
