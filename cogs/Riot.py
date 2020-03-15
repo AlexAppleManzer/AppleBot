@@ -9,8 +9,10 @@ class Test(commands.Cog):
 
     @commands.command()
     async def isTilted(self, ctx, summonerName):
-        summonerId = (await RiotApi.getSummoner(summonerName))['accountId']
-        match_history = await RiotApi.getSummonerHistory(summonerId)
+        summoner = await RiotApi.getSummoner(summonerName)
+        summonerId = summoner['id']
+        summonerAccountId = summoner['accountId']
+        match_history = await RiotApi.getSummonerHistory(summonerAccountId)
         loss_streak = 0
 
         for match in match_history['matches'][:5]:
@@ -24,6 +26,7 @@ class Test(commands.Cog):
             
             # assumes team is 100 if identity is 1-5 else assume team 200  
             team_100 = True if participant_id <= 5 else False
+            print(participant_id)
             team_100_win = match_info['teams'][0]['win'] == "Win"
 
             if team_100 == team_100_win:
