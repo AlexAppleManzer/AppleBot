@@ -1,4 +1,9 @@
 {
     "command-prefix":"^",
-    "description": "Apple bot is an applebot"
+    "description": "Apple bot is an applebot",
+    "riot-api": {
+        "base-urls": {
+            "na": "https://na1.api.riotgames.com"
+        }
+    }
 }

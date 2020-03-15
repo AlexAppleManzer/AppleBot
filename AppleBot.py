@@ -5,27 +5,21 @@ from discord.ext import commands
 
 import datetime
 import asyncio
-import json
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
 
+from common.AppSettings import AppSettings
 
 client = discord.Client()
 
-def config_load():
-    load_dotenv()
-    token = os.getenv('DISCORD_TOKEN')
-
-    with open('config.json', 'r', encoding='utf-8') as doc:
-        return (json.load(doc), token)
-
 async def run():
-    (config, token) = config_load()
-    bot = Bot(config=config)
+    load_dotenv()
+    settings = AppSettings()
+    bot = Bot(config=settings)
 
     try:
-        await bot.start(token)
+        await bot.start(settings['DISCORD_TOKEN'])
     except KeyboardInterrupt:
         await bot.logout()
 
