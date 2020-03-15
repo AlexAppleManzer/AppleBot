@@ -9,6 +9,12 @@ class Test(commands.Cog):
 
     @commands.command()
     async def isTilted(self, ctx, summonerName):
+        """Checks if a Summoner is Tilted 
+        
+            (if they are on a loss streak or not)
+            Parameters:
+            summonerName (na riot account)
+        """
         summoner = await RiotApi.getSummoner(summonerName)
         summonerId = summoner['id']
         summonerAccountId = summoner['accountId']
@@ -26,7 +32,6 @@ class Test(commands.Cog):
             
             # assumes team is 100 if identity is 1-5 else assume team 200  
             team_100 = True if participant_id <= 5 else False
-            print(participant_id)
             team_100_win = match_info['teams'][0]['win'] == "Win"
 
             if team_100 == team_100_win:
